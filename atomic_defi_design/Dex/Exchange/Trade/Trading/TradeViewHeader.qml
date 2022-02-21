@@ -27,12 +27,12 @@ Item
         Item
         {
             Layout.leftMargin: 30
-            Layout.preferredWidth: 120
+            Layout.preferredWidth: 192
 
             // Simple/Pro select cursor
             Rectangle
             {
-                width: 84
+                width: 96
                 height: 32
                 radius: 18
                 anchors.verticalCenter: parent.verticalCenter
@@ -43,7 +43,7 @@ Item
             DexLabel
             {
                 id: _simpleLabel
-                text: "Simple"
+                text: "SmartSwap"
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 font.bold: true
@@ -59,7 +59,7 @@ Item
             DexLabel
             {
                 id: _proLabel
-                text: "Pro"
+                text: "SmartDex"
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 font.bold: true

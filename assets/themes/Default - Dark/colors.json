@@ -3,8 +3,7 @@
     "foregroundColor": "#ffffff",
     "foregroundColor2": "#7A8EA1FF",
     "foregroundColor3": "#ABC0D3FF",
-    "backgroundColor": "#202337",
-    "secondBackgroundColor": "#24273D",
+    "backgroundColor": "#15182a",
     "backgroundColorDeep": "#171a2c",
 
     "buttonColorDisabled": "#28375A",
@@ -62,8 +61,9 @@
     "textSelectedColor": "#0e1021",
 
     "textFieldBackgroundColor": "#313555FF",
+    "textFieldActiveBackgroundColor": "#313555CC",
     "textFieldPrefixColor": "#8790B2FF",
-    "textFieldSuffixColor": "#456078FF#",
+    "textFieldSuffixColor": "#456078FF",
 
     "chartTradingLineBackgroundColor": "#24283d",
     "chartTradingLineColor": "#74fbee",
@@ -77,11 +77,15 @@
     "rangeSliderIndicatorBackgroundStartColor": "#5A68E6FF",
     "rangeSliderIndicatorBackgroundEndColor": "#4986EAFF",
 
+    "loginWalletIconColorStart": "#5A68E6FF",
+    "loginWalletIconColorEnd": "#4986EAAD",
+
     "sidebarBgColor": "#202337",
     "sidebarVersionTextColor": "#2F5688",
     "sidebarCursorStartColor": "#31B1F0",
     "sidebarCursorEndColor": "#5B69E600",
     "sidebarLineTextHovered": "#2C87B9",
+    "sidebarLineTextSelected": "#FFFFFFFF",
 
     "tradeBuyModeSelectorBackgroundColorStart": "#6A4DE3FF",
     "tradeBuyModeSelectorBackgroundColorEnd": "#2279F1FF",
@@ -89,8 +93,8 @@
     "tradeSellModeSelectorBackgroundColorEnd": "#E216A9FF",
     "tradeMarketModeSelectorNotSelectedBackgroundColor": "#89B6FF21",
 
-    "okColor": "#00C058",
-    "noColor": "#E52167",
+    "okColor": "#74fbee",
+    "noColor": "#d13990",
 
     "arrowUpColor": "#F85757",
     "arrowDownColor": "#845FEF",

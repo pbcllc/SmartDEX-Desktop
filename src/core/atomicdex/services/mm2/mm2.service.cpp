@@ -594,19 +594,35 @@ namespace atomic_dex
         nlohmann::json btc_kmd_batch = nlohmann::json::array();
         if (first_time)
         {
-            coin_config        coin_info = get_coin_info(g_second_primary_dex_coin);
-            t_electrum_request request{.coin_name = coin_info.ticker, .servers = coin_info.electrum_urls.value(), .with_tx_history = true};
-            if (coin_info.segwit && coin_info.is_segwit_on)
+            coin_config coin_info = get_coin_info(g_second_primary_dex_coin);
+            if (coin_info.coin_type != CoinType::ERC20 && coin_info.coin_type != CoinType::BEP20)
             {
-                request.address_format                   = nlohmann::json::object();
-                request.address_format.value()["format"] = "segwit";
+                t_electrum_request request{.coin_name = coin_info.ticker, .servers = coin_info.electrum_urls.value(), .with_tx_history = true};
+                if (coin_info.segwit && coin_info.is_segwit_on)
+                {
+                    request.address_format                   = nlohmann::json::object();
+                    request.address_format.value()["format"] = "segwit";
+                }
+                nlohmann::json j = ::mm2::api::template_request("electrum");
+                ::mm2::api::to_json(j, request);
+                btc_kmd_batch.push_back(j);
             }
-            nlohmann::json j = ::mm2::api::template_request("electrum");
-            ::mm2::api::to_json(j, request);
-            btc_kmd_batch.push_back(j);
+            else
+            {
+                t_enable_request request{
+                    .coin_name       = coin_info.ticker,
+                    .urls            = coin_info.urls.value_or(std::vector<std::string>{}),
+                    .coin_type       = coin_info.coin_type,
+                    .is_testnet      = coin_info.is_testnet.value_or(false),
+                    .with_tx_history = false};
+                nlohmann::json j = ::mm2::api::template_request("enable");
+                ::mm2::api::to_json(j, request);
+                // SPDLOG_INFO("enable request: {}", j.dump(4));
+                btc_kmd_batch.push_back(j);
+            }
             coin_info = get_coin_info(g_primary_dex_coin);
             t_electrum_request request_kmd{.coin_name = coin_info.ticker, .servers = coin_info.electrum_urls.value(), .with_tx_history = true};
-            j = ::mm2::api::template_request("electrum");
+            nlohmann::json j = ::mm2::api::template_request("electrum");
             ::mm2::api::to_json(j, request_kmd);
             btc_kmd_batch.push_back(j);
         }

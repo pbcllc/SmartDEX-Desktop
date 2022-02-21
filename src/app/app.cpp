@@ -45,6 +45,7 @@
 #include "atomicdex/services/price/coinpaprika/coinpaprika.provider.hpp"
 #include "atomicdex/services/price/oracle/band.provider.hpp"
 #include "atomicdex/services/price/orderbook.scanner.service.hpp"
+#include "atomicdex/services/price/smartfi/smartfi.provider.hpp"
 
 namespace
 {
@@ -149,6 +150,24 @@ namespace atomic_dex
         }
 
         return true;
+    }
+
+    bool               
+    application::disable_no_balance_coins()
+    {
+        auto* portfolio_page = get_portfolio_page();
+        auto* portfolio_mdl = portfolio_page->get_portfolio();
+        auto portfolio_data = portfolio_mdl->get_underlying_data();
+        QStringList coins_to_disable{};
+        
+        for (auto& coin : portfolio_data)
+        {
+            if (coin.balance.toFloat() == 0)
+            {
+                coins_to_disable.push_back(coin.ticker);
+            }
+        }
+        return disable_coins(coins_to_disable);
     }
 
     bool
@@ -340,6 +359,7 @@ namespace atomic_dex
         system_manager_.create_system<global_price_service>(system_manager_, settings_page_system.get_cfg());
         system_manager_.create_system<orderbook_scanner_service>(system_manager_);
         system_manager_.create_system<band_oracle_price_service>();
+        system_manager_.create_system<smartfi_price_service>();
         // system_manager_.create_system<coinpaprika_provider>(system_manager_);
         //system_manager_.create_system<coingecko_provider>(system_manager_);
         system_manager_.create_system<komodo_prices_provider>();
