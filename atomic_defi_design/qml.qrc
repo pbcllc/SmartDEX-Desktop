@@ -55,6 +55,7 @@
         <file>assets/images/coins/btc.png</file>
         <file>assets/images/coins/btcz.png</file>
         <file>assets/images/coins/btt.png</file>
+        <file>assets/images/coins/bttc.png</file>
         <file>assets/images/coins/btu.png</file>
         <file>assets/images/coins/btx.png</file>
         <file>assets/images/coins/busd.png</file>
@@ -121,6 +122,7 @@
         <file>assets/images/coins/ftmt.png</file>
         <file>assets/images/coins/gala.png</file>
         <file>assets/images/coins/gleec.png</file>
+        <file>assets/images/coins/glmr.png</file>
         <file>assets/images/coins/gno.png</file>
         <file>assets/images/coins/grms.png</file>
         <file>assets/images/coins/gm.png</file>
@@ -134,6 +136,7 @@
         <file>assets/images/coins/hpy.png</file>
         <file>assets/images/coins/ht.png</file>
         <file>assets/images/coins/husd.png</file>
+        <file>assets/images/coins/ic.png</file>
         <file>assets/images/coins/il8p.png</file>
         <file>assets/images/coins/iln.png</file>
         <file>assets/images/coins/inj.png</file>
@@ -151,6 +154,7 @@
         <file>assets/images/coins/kmd.png</file>
         <file>assets/images/coins/knc.png</file>
         <file>assets/images/coins/koin.png</file>
+        <file>assets/images/coins/ksm.png</file>
         <file>assets/images/coins/labs.png</file>
         <file>assets/images/coins/lbc.png</file>
         <file>assets/images/coins/lcc.png</file>
@@ -249,6 +253,7 @@
         <file>assets/images/coins/tel.png</file>
         <file>assets/images/coins/tft.png</file>
         <file>assets/images/coins/thc.png</file>
+        <file>assets/images/coins/thc_bep20.png</file>
         <file>assets/images/coins/thx.png</file>
         <file>assets/images/coins/tkl.png</file>
         <file>assets/images/coins/tmtg.png</file>
@@ -376,6 +381,7 @@
         <file>Dex/Components/ComponentWithTitle.qml</file>
         <file>Dex/Components/CopyFieldButton.qml</file>
         <file>Dex/Components/DangerButton.qml</file>
+        <file>Dex/Components/DefaultAlertIcon.qml</file>
         <file>Dex/Components/DefaultAnimatedImage.qml</file>
         <file>Dex/Components/DefaultBusyIndicator.qml</file>
         <file>Dex/Components/DefaultButton.qml</file>
@@ -411,7 +417,6 @@
         <file>Dex/Components/DexAppPasswordField.qml</file>
         <file>Dex/Components/DexBox.qml</file>
         <file>Dex/Components/DexBoxManager.qml</file>
-        <file>Dex/Components/DexBusyIndicator.qml</file>
         <file>Dex/Components/DexButton.qml</file>
         <file>Dex/Components/DexCheckBox.qml</file>
         <file>Dex/Components/DexCheckEye.qml</file>
