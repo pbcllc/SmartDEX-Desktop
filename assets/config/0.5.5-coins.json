@@ -5632,7 +5632,7 @@
       "https://bscscan.com/"
     ],
     "type": "BEP-20",
-    "active": false,
+    "active": true,
     "currently_enabled": false
   },
   "SOULJA": {
