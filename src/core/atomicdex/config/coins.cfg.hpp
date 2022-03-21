@@ -35,10 +35,12 @@ namespace atomic_dex
     struct coin_config
     {
       public:
-        static constexpr const char* erc_gas_stations = "https://ethgasstation.info/json/ethgasAPI.json";
-        using electrum_servers                        = std::vector<electrum_server>;
-        using nodes                                   = std::vector<std::string>;
+        static constexpr const char* erc_gas_stations   = "https://ethgasstation.info/json/ethgasAPI.json";
+        static constexpr const char* matic_gas_stations = "https://gasstation-mainnet.matic.network/";
+        using electrum_servers                          = std::vector<electrum_server>;
+        using nodes                                     = std::vector<std::string>;
         std::string                     ticker;
+        std::optional<std::string>      alias_ticker{std::nullopt};
         std::string                     gui_ticker; ///< Ticker displayed in the gui
         std::string                     name;       ///< nice name
         std::optional<electrum_servers> electrum_urls;
@@ -61,6 +63,9 @@ namespace atomic_dex
         bool                            wallet_only{false};
         bool                            has_parent_fees_ticker{false}; ///< True if parent fees is different from current ticker eg: ERC20 tokens
         std::string                     fees_ticker;
+        bool                            segwit{false};
+        bool                            is_segwit_on{false};
+        bool                            is_erc_family{false};
     };
 
     void from_json(const nlohmann::json& j, coin_config& cfg);

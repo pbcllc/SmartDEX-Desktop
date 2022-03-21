@@ -4,13 +4,15 @@ include(DEX_NEW_LIB)
 DEX_NEW_LIB(core INTERFACE
         INTERFACE_DEPS
             cpprestsdk::cpprest Qt::Core Qt::Quick Qt::Svg Qt::Charts Qt::WebEngine Qt::WebEngineCore Qt::WebEngineWidgets
-            Qt::Widgets nlohmann_json::nlohmann_json antara_qrcode spdlog::spdlog antara::world reproc++
+            Qt::Widgets nlohmann_json::nlohmann_json antara_qrcode spdlog::spdlog antara::world
             unofficial-btc::bitcoin komodo-date::date komodo-taskflow::taskflow
             Boost::random Boost::filesystem komodo-sodium::sodium antara::app::net
         INTERFACE_DEFS
             $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG> $<$<PLATFORM_ID:Windows>:HAS_REMOTE_API>
             $<$<PLATFORM_ID:Windows>:AUTO_DOWNLOAD>
+            $<$<PLATFORM_ID:Windows>:NOMINMAX>
             $<$<PLATFORM_ID:Windows>:SPDLOG_WCHAR_TO_UTF8_SUPPORT>
+            _TURN_OFF_PLATFORM_STRING
             DEX_NAME="${DEX_DISPLAY_NAME}" DEX_WEBSITE_URL="${DEX_WEBSITE}"
             DEX_SUPPORT_URL="${DEX_SUPPORT_PAGE}" DEX_DISCORD_URL="${DEX_DISCORD}" DEX_TWITTER_URL="${DEX_TWITTER}"
             DEX_PRIMARY_COIN="${DEX_PRIMARY_COIN}" DEX_SECOND_PRIMARY_COIN="${DEX_SECOND_PRIMARY_COIN}" #DEX_COMMON_DATA_FOLDER="${DEX_COMMON_DATA_FOLDER}"
@@ -41,9 +43,7 @@ if (DISABLE_GEOBLOCKING)
     message(STATUS "Disabling Geoblocking for dev purpose")
     target_compile_definitions(${PROJECT_NAME}_core INTERFACE -DDISABLE_GEOBLOCKING)
 endif ()
-if (NOT WITH_HOTRELOAD)
-    target_link_libraries(${PROJECT_NAME}_core INTERFACE SortFilterProxyModel)
-endif()
+target_link_libraries(${PROJECT_NAME}_core INTERFACE SortFilterProxyModel)
 
 
 # Translation files
@@ -55,7 +55,8 @@ set(TS_FILES
         ${CMAKE_SOURCE_DIR}/atomic_defi_design/assets/languages/atomic_defi_ru.ts)
 set_source_files_properties(${TS_FILES} PROPERTIES OUTPUT_LOCATION ${CMAKE_SOURCE_DIR}/atomic_defi_design/assets/languages)
 qt5_create_translation(QM_FILES
-        ${PROJECT_SOURCE_DIR}/atomic_defi_design/qml
+        ${PROJECT_SOURCE_DIR}/atomic_defi_design/Dex
+        ${PROJECT_SOURCE_DIR}/src
         ${TS_FILES}
         OPTIONS -source-language en_US -no-obsolete)
 message(STATUS "QM FILES -> ${QM_FILES}")
@@ -72,7 +73,8 @@ add_executable(${PROJECT_NAME}
         ${CMAKE_SOURCE_DIR}/cmake/install/windows/dex.rc
 
         ##! QRC
-        ${CMAKE_SOURCE_DIR}/qml.qrc
+        ${CMAKE_SOURCE_DIR}/atomic_defi_design/qml.qrc
+        ${CMAKE_SOURCE_DIR}/atomic_defi_design/imports/qml.qrc
 
         ##! Linguistic
         ${QM_FILES}
@@ -83,7 +85,7 @@ set_target_properties(${PROJECT_NAME}
         PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
 
-set_target_properties(${PROJECT_NAME} PROPERTIES UNITY_BUILD ON)
+#set_target_properties(${PROJECT_NAME} PROPERTIES UNITY_BUILD ON)
 if (APPLE)
     set_property(SOURCE core/atomicdex/platform/osx/manager.mm PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 endif ()
@@ -98,6 +100,7 @@ add_executable(${PROJECT_NAME}_tests MACOSX_BUNDLE ${ICON}
         tests/config/coins.cfg.tests.cpp
         ##! API
         tests/api/coingecko/coingecko.tests.cpp
+        tests/api/komodo_prices/komodo.prices.tests.cpp
         tests/api/mm2/mm2.rpc.trade.preimage.tests.cpp
         tests/api/mm2/mm2.fraction.tests.cpp
         #tests/api/github/github.api.tests.cpp
@@ -181,10 +184,10 @@ if (WIN32)
     add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/ci_tools_atomic_dex/windows_misc $<TARGET_FILE_DIR:${PROJECT_NAME}>)
-    message(STATUS "${WINDEPLOYQT_PATH} ${CMAKE_BINARY_DIR}/bin/${PROJECT_NAME}.exe --qmldir ${CMAKE_SOURCE_DIR}/atomic_defi_design/qml")
+    message(STATUS "${WINDEPLOYQT_PATH} ${CMAKE_BINARY_DIR}/bin/${PROJECT_NAME}.exe --qmldir ${CMAKE_SOURCE_DIR}/atomic_defi_design/Dex")
     add_custom_command(TARGET ${PROJECT_NAME}
             POST_BUILD
-            COMMAND ${WINDEPLOYQT_PATH} ${CMAKE_BINARY_DIR}/bin/${PROJECT_NAME}.exe --qmldir ${CMAKE_SOURCE_DIR}/atomic_defi_design/qml
+            COMMAND ${WINDEPLOYQT_PATH} ${CMAKE_BINARY_DIR}/bin/${PROJECT_NAME}.exe --qmldir ${CMAKE_SOURCE_DIR}/atomic_defi_design/Dex
             )
     include(${CMAKE_SOURCE_DIR}/cmake/install/windows/dex_install.cmake)
 
