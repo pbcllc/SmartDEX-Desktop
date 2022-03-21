@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.15
 import "../Constants"
 import App 1.0 //> API.app_name
 
-BasicModal
+MultipageModal
 {
     id: root
 
@@ -21,9 +21,9 @@ BasicModal
     {}
     property bool close_only: false
 
-    ModalContent
+    MultipageModalContent
     {
-        title: qsTr("Disclaimer & Terms of Service")
+        titleText: qsTr("Disclaimer & Terms of Service")
 
         InnerBackground
         {
@@ -218,4 +218,3 @@ BasicModal
 <p>If you have any questions about these Terms or the Services, please contact us at <a href='mailto:support@smartfi.zendesk.com'>support@smartfi.zendesk.com</a></p>"
     }
 }
-        
