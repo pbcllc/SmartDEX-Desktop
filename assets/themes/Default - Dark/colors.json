@@ -3,9 +3,9 @@
     "foregroundColor": "#ffffffFF",
     "foregroundColor2": "#7A8EA1FF",
     "foregroundColor3": "#ABC0D3FF",
-    "backgroundColor": "#15182a",
+    "backgroundColor": "#15182AFF",
     "secondBackgroundColor": "#24273DFF",
-    "backgroundColorDeep": "#171a2c",
+    "backgroundColorDeep": "#171A2CFF",
 
     "busyIndicatorColor": "#4986EAFF",
 
@@ -69,7 +69,7 @@
     "textFieldSuffixColor": "#456078FF",
 
     "chartTradingLineBackgroundColor": "#24283dFF",
-    "chartTradingLineColor": "#74fbeeFF",
+    "chartTradingLineColor": "#74FBEEFFFF",
 
     "innerBackgroundColor": "#1F263FFF",
 
@@ -83,7 +83,7 @@
     "userIconColorStart": "#5A68E6FF",
     "userIconColorEnd": "#4986EAAD",
 
-    "sidebarBgColor": "#202337FF",
+    "sidebarBgColor": "#15182AFF",
     "sidebarVersionTextColor": "#2F5688FF",
     "sidebarCursorStartColor": "#31B1F0FF",
     "sidebarCursorEndColor": "#5B69E600",
@@ -98,8 +98,8 @@
 
     "addressBookTagColors": ["#627EEAFF", "#FFD87AFF", "#F7931AFF"],
     
-    "okColor": "#74fbee",
-    "noColor": "#d13990",
+    "okColor": "#74FBEEFF",
+    "noColor": "#D13990FF",
 
     "senderColorStart": "#F85757FF",
     "receiverColorStart": "#845FEFFF",
