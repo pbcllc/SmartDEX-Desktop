@@ -1,6 +1,6 @@
 {
     "accentColor": "#2C3D66FF",
-    "foregroundColor": "#ffffffFF",
+    "foregroundColor": "#FFFFFFFF",
     "foregroundColor2": "#7A8EA1FF",
     "foregroundColor3": "#ABC0D3FF",
     "backgroundColor": "#15182AFF",
@@ -14,9 +14,9 @@
     "buttonColorHovered": "#4068B929",
     "buttonColorPressed": "#2932546C",
     "buttonTextDisabledColor": "#444444FF",
-    "buttonTextEnabledColor": "#ffffffFF",
-    "buttonTextHoveredColor": "#ffffffFF",
-    "buttonTextPressedColor": "#ffffffFF",
+    "buttonTextEnabledColor": "#FFFFFFFF",
+    "buttonTextHoveredColor": "#FFFFFFFF",
+    "buttonTextPressedColor": "#FFFFFFFF",
 
     "gradientButtonStartColor": "#4986EAAD",
     "gradientButtonEndColor": "#5A68E6FF",
@@ -69,7 +69,7 @@
     "textFieldSuffixColor": "#456078FF",
 
     "chartTradingLineBackgroundColor": "#24283dFF",
-    "chartTradingLineColor": "#74FBEEFFFF",
+    "chartTradingLineColor": "#74FBEEFF",
 
     "innerBackgroundColor": "#1F263FFF",
 
