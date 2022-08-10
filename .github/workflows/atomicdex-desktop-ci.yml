@@ -14,6 +14,9 @@ env:
   DEX_DISPLAY_NAME: "SmartDEX"
   DEX_COMPANY: "SmartFi"
   DEX_WEBSITE: "https://smartfi.com/"
+  DEX_API: "mm2-smartdex"
+  DEX_RPCPORT: 7793
+  DEX_RPC: "http://127.0.0.1:7793"
 
 jobs:
 
