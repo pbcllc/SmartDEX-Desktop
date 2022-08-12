@@ -14,6 +14,9 @@ env:
   DEX_DISPLAY_NAME: "SmartDEX"
   DEX_COMPANY: "SmartFi"
   DEX_WEBSITE: "https://smartfi.com/"
+  DEX_API: "mm2-smartdex"
+  DEX_RPCPORT: 7793
+  DEX_RPC: "http://127.0.0.1:7793"
 
 jobs:
 
@@ -58,61 +61,49 @@ jobs:
           submodules: 'true'
       - run: git submodule update --init --recursive
 
-
-      - uses: actions/setup-python@v2
+      - name: Setup Python
+        uses: actions/setup-python@v3
         with:
-          python-version: '3.8'
+          python-version: '3.9'
 
       - name: Install QT (Linux)
         if: runner.os == 'Linux'
-        uses: KomodoPlatform/install-qt-action@v2.9.0
+        uses: KomodoPlatform/install-qt-action@v2.14.0
         with:
           version: ${{ matrix.qt }}
+          setup-python: 'false'
           host: 'linux'
           target: 'desktop'
           dir: '${{ github.workspace }}'
-          #mirror: 'http://mirrors.ocf.berkeley.edu/qt'
-          mirror: https://qt-mirror.dannhauer.de
-          #mirror: https://www.funet.fi/pub/mirrors/download.qt-project.org
-          #mirror: https://ftp.fau.de/qtproject
           modules: 'qtcharts qtwidgets debug_info qtwebengine qtwebview'
           aqtversion: '==0.8'
           py7zrversion: '==0.6'
 
       - name: Install QT (MacOS)
         if: runner.os == 'macOS'
-        uses: KomodoPlatform/install-qt-action@v2.9.0
+        uses: KomodoPlatform/install-qt-action@v2.14.0
         with:
           version: ${{ matrix.qt }}
+          setup-python: 'false'
           host: 'mac'
           target: 'desktop'
-          #mirror: 'http://mirrors.ocf.berkeley.edu/qt'
-          mirror: https://qt-mirror.dannhauer.de
-          #mirror: https://www.funet.fi/pub/mirrors/download.qt-project.org
-          #mirror: https://ftp.fau.de/qtproject
           dir: '${{ github.workspace }}'
           modules: 'qtcharts qtwidgets debug_info qtwebview qtwebengine'
 
       - name: Install QT IFW (MacOS)
         if: runner.os == 'macOS'
         run: |
-          python3  -m aqt tool mac tools_ifw 4.2.0-0-202111080927 qt.tools.ifw.42 --outputdir ${{ github.workspace }}/Qt
-          echo "${{ github.workspace }}/Qt/Tools/QtInstallerFramework/4.0/bin" >> $GITHUB_PATH
-          echo "${{ github.workspace }}/Qt/Tools/QtInstallerFramework/4.1/bin" >> $GITHUB_PATH
-          echo "${{ github.workspace }}/Qt/Tools/QtInstallerFramework/4.2/bin" >> $GITHUB_PATH
+          python3  -m aqt tool mac tools_ifw 4.4.1 qt.tools.ifw.44 --outputdir ${{ github.workspace }}/Qt
+          echo "${{ github.workspace }}/Qt/Tools/QtInstallerFramework/4.4/bin" >> $GITHUB_PATH
 
       - name: Install QT (Windows)
         if: runner.os == 'Windows'
-        uses: KomodoPlatform/install-qt-action@v2.9.0
+        uses: KomodoPlatform/install-qt-action@v2.14.0
         with:
           version: ${{ matrix.qt }}
           host: 'windows'
           target: 'desktop'
           arch: 'win64_msvc2019_64'
-          #mirror: 'http://mirrors.ocf.berkeley.edu/qt'
-          mirror: https://qt-mirror.dannhauer.de
-          #mirror: https://www.funet.fi/pub/mirrors/download.qt-project.org
-          #mirror: https://ftp.fau.de/qtproject
           dir: 'C:\'
           modules: 'qtcharts qtwidgets debug_info qtwebview qtwebengine'
 
@@ -120,10 +111,8 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           python -m pip install --upgrade pip
-          python -m aqt tool windows tools_ifw 4.2.0-0-202111080926 qt.tools.ifw.42 --outputdir C:/Qt
-          echo "C:/Qt/Tools/QtInstallerFramework/4.0/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          echo "C:/Qt/Tools/QtInstallerFramework/4.1/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          echo "C:/Qt/Tools/QtInstallerFramework/4.2/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          python -m aqt tool windows tools_ifw 4.4.1 qt.tools.ifw.44 --outputdir C:/Qt
+          echo "C:/Qt/Tools/QtInstallerFramework/4.4/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           echo $env:GITHUB_PATH
           echo $env:PATH
 
@@ -217,6 +206,7 @@ jobs:
           export INSTALLER_MAC_SIGN_IDENTITY="${{ secrets.INSTALLER_MAC_SIGN_IDENTITY }}"
           export APPLE_ATOMICDEX_PASSWORD="${{ secrets.APPLE_ATOMICDEX_PASSWORD }}"
           export APPLE_ID="${{ secrets.APPLE_ID }}"
+          export ASC_PUBLIC_ID="${{ secrets.ASC_PUBLIC_ID }}"
           export QT_INSTALL_CMAKE_PATH=${{ github.workspace }}/Qt/${{ matrix.qt }}/clang_64/lib/cmake
           export QT_ROOT=${{ github.workspace }}/Qt/${{ matrix.qt }}
           export MACOSX_DEPLOYMENT_TARGET=10.13
@@ -369,5 +359,3 @@ jobs:
           name: ${{ env.artifact_name_installer }}
           path: ./bundled/windows/${{ env.DEX_PROJECT_NAME }}_installer.exe
           retention-days: 7
-      
-      

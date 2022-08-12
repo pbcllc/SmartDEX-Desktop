@@ -1,14 +1,21 @@
 # Default project values
+set(DEX_API "mm2-smartdex")
+set(DEX_RPCPORT 7793)
+set(DEX_RPC "http://127.0.0.1:7793")
+
 set(DEX_PROJECT_NAME "smartdex-desktop")
 set(DEX_DISPLAY_NAME "SmartDEX")
 set(DEX_COMPANY "SmartFi")
 set(DEX_WEBSITE "https://smartfi.com/")
 set(DEX_MAINTENANCE_TOOL_NAME "SmartDEX Maintenance Tool")
 set(DEX_SUPPORT_PAGE "https://help.smartfi.com/hc/en-us")
+
 set(DEX_DISCORD "https://discord.gg/yrYDtEnsfg")
 set(DEX_TWITTER "https://twitter.com/smartfiportal")
-set(DEX_PRIMARY_COIN "SFUSD") ## Main coin of the DEX, will enable it by default and will be the default left ticker for trading
-set(DEX_SECOND_PRIMARY_COIN "BNB")  ## Second main coin of the DEX, will enable it by default and will be the default right ticker for trading
+
+set(DEX_PRIMARY_COIN "SFUSD")                       ## Main coin of the DEX, will enable it by default and will be the default left ticker for trading
+set(DEX_SECOND_PRIMARY_COIN "BNB")                  ## Second main coin of the DEX, will enable it by default and will be the default right ticker for trading
+
 option(DISABLE_GEOBLOCKING "Enable to disable geoblocking (for dev purpose)" ON)
 set(DEX_REPOSITORY_OWNER ${DEX_COMPANY})
 set(DEX_REPOSITORY_NAME "atomicDEX-Desktop")
@@ -25,6 +32,15 @@ if (UNIX AND NOT APPLE)
 endif ()
 
 # Erases default project values with environment variables if they exist.
+if (DEFINED ENV{DEX_API})
+    set(DEX_API $ENV{DEX_API})
+endif ()
+if (DEFINED ENV{DEX_RPCPORT})
+    set(DEX_RPCPORT $ENV{DEX_RPCPORT})
+endif ()
+if (DEFINED ENV{DEX_RPC})
+    set(DEX_RPC $ENV{DEX_RPC})
+endif ()
 if (DEFINED ENV{DEX_PROJECT_NAME})
     set(DEX_PROJECT_NAME $ENV{DEX_PROJECT_NAME})
 endif ()
